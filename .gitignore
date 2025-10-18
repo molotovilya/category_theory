@@ -1,0 +1,14 @@
+node_modules/
+.quartz-cache/
+private/
+.obsidian/
+public/
+.contentlayer/
+.DS_Store
+dist/
+.vscode/
+.idea/
+*.log
+deploy.bat
+*.bat
+*.lnk

@@ -1,0 +1,192 @@
+@use "./variables.scss" as *;
+@use "sass:color";
+
+.callout {
+  border: 3.5px double var(--border);
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 0 1.1rem 0.3rem 1.1rem;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  box-sizing: border-box;
+  overflow: visible;
+  margin-bottom: 1.5em;
+
+  & > .callout-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+    opacity: 1;
+    margin-top: 1.2rem;
+    padding-bottom: 0;
+
+    & > :first-child {
+      margin-top: 0;
+    }
+  }
+
+
+
+
+// Минималистичные SVG иконки
+--callout-icon-info: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>');
+
+--callout-icon-quest: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.8" fill="currentColor"/></svg>');
+
+--callout-icon-warn: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><circle cx="12" cy="17" r="0.7" fill="currentColor"/></svg>');
+
+--callout-icon-idea: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><path d="M9 21h6"/></svg>');
+
+--callout-icon-fold: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>');
+
+// Example - страничка со списком (горизонтальные линии)
+--callout-icon-example: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="21" x2="12" y2="21"/></svg>');
+
+// Counterexample - крестик в кружке
+--callout-icon-anti: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>');
+
+
+
+
+
+// info - мягкий серый
+&[data-callout="info"] {
+  --color: #787878;
+  --border: #8c8c8c;
+  --callout-icon: var(--callout-icon-info);
+}
+
+// question - мягкий синий
+&[data-callout="quest"] {
+  --color: #4682b4;
+  --border: #6496c8;
+  --callout-icon: var(--callout-icon-quest);  // Было --callout-icon-question
+}
+
+// warning - мягкий красный
+&[data-callout="warn"] {
+  --color: #c85050;
+  --border: #dc6464;
+  --callout-icon: var(--callout-icon-warn);  // Было --callout-icon-warning
+}
+
+// example - мягкий зелёный
+&[data-callout="example"] {
+  --color: #3ca06e;
+  --border: #50b482;
+  --callout-icon: var(--callout-icon-example);
+}
+
+// idea - мягкий жёлтый (лампочка)
+&[data-callout="idea"] {
+  --color: #dca032;
+  --border: #e6b450;
+  --callout-icon: var(--callout-icon-idea);
+}
+
+// counterexample - мягкий оранжевый (крестик в круге)
+&[data-callout="anti"] {
+  --color: #dc643c;
+  --border: #e67850;
+  --callout-icon: var(--callout-icon-anti);  // Было --callout-icon-counterexample
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Свёрнутое состояние
+  &.is-collapsed {
+    min-height: 36px;
+    max-height: 36px;
+    padding: 0 1.1rem;
+    
+    & > .callout-title > .fold-callout-icon {
+      transform: rotateZ(-90deg);
+    }
+
+    & > .callout-content {
+      max-height: 0;
+      margin-top: 0;
+      padding: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.callout-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  color: var(--color);
+  padding: 0 0.5em;
+  margin-top: -14px; // расмоложение заголовка в уровень с рамкой. Чем меньше - тем выше.
+  margin-left: -0.5em;
+  width: fit-content;
+  background-color: var(--light);
+  letter-spacing: 0.05em;
+  font-variant-caps: all-small-caps;
+  line-height: 1.2;
+
+  --icon-size: 18px;
+
+  & .fold-callout-icon {
+    transition: transform 0.15s ease;
+    opacity: 0.8;
+    cursor: pointer;
+    --callout-icon: var(--callout-icon-fold);
+  }
+
+  & > .callout-title-inner > p {
+    color: var(--color);
+    margin: 0;
+  }
+
+  .callout-icon,
+  & .fold-callout-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    flex: 0 0 var(--icon-size);
+
+    background-size: var(--icon-size) var(--icon-size);
+    background-position: center;
+    background-color: var(--color);
+    mask-image: var(--callout-icon);
+    mask-size: var(--icon-size) var(--icon-size);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    padding: 0.2rem 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .callout-title-inner {
+    font-weight: $semiBoldWeight;
+    display: flex;
+    align-items: center;
+  }
+}
